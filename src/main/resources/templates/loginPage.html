@@ -1,0 +1,54 @@
+
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+  <title>Login</title>
+
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+
+<div th:if="${#request.getParameter('error') == 'true'}"
+     style="color:red;margin:10px 0px;">
+  <br><br><br>
+  Login Failed!!!<br />
+  Reason :
+  <span th:if="${#session!= null and #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}"
+        th:utext="${#session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION').message}">
+                Static summary
+         </span>
+
+</div>
+
+<div class="container mt-5 " style="position: fixed; top: 29%; left: 36%;">
+  <div class="row">
+    <div class="col-md-5">
+      <div class="card text-center">
+        <h2 class="card-title text-center">Authentication </h2>
+        <div class="card-body py-md-4">
+          <form name='f' th:action="@{/j_spring_security_check}" method='POST'>
+            <div class="form-group">
+              <input  class="form-control mt-2" type='text' name="username" value='' placeholder="Type username">
+            </div>
+            <div class="form-group">
+              <input class="form-control mt-2" type='password' name='password' placeholder="Type password" />
+            </div>
+
+            <div class="d-flex flex-row align-items-center justify-content-between">
+              <div><input type="checkbox" name="remember-me" > Remember me</div>
+
+
+              <button type="submit" value="submit" class="btn btn-primary mt-2">Log In</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</body>
+
+</html>
